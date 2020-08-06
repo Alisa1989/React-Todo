@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 
 import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
 
 const todos = [
   {
@@ -23,24 +23,51 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      list: todos
+      todos: todos
     };
   }
 
-  toggleItem= itemId => {
-    console.log(itemId);
-  }
+  //change state of item from purchased to !purchased
+  toggleItem = (itemId, isCompleted) => {
+    console.log(itemId, isCompleted);
+    this.setState({
+      todos: this.state.todos.map(item => {
+        //going through array and looking for the toggled item
+        if (itemId === item.id) {
+          return {
+            ...item,
+            completed: !item.completed
+          };
+        }
+        return item; //if not found you stick the other items back in the array
+      })
+    });
+  };
+
+  //add new item
+  addItem = item => {
+    const newItem = {
+      name: item,
+      id: Date.now(),
+      purchased: false
+    };
+    this.setState({
+      todos: [...this.state.todos, newItem]
+    });
+    console.log("list updated")
+  };
 
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoList 
+        <div>
+          <h2>Welcome to your Todo App!</h2>
+          <TodoForm addItem={this.addItem} />
+        </div>
+        <TodoList
           todos={this.state.todos}
+          toggleItem={this.toggleItem}
         />
-        {/* {todos.map(item => (
-     <p>{item.task}</p>
-     ))}  */}
       </div>
     );
   }
