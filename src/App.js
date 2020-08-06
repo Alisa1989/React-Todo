@@ -57,12 +57,20 @@ class App extends React.Component {
     console.log("list updated")
   };
 
+//clear completed
+clearCompleted = e => {
+  e.preventDefault();
+  this.setState({
+    todos: this.state.todos.filter(item => !item.completed)
+  });
+}
+
   render() {
     return (
       <div>
         <div>
           <h2>Let's get some stuff done!!</h2>
-          <TodoForm addItem={this.addItem} />
+          <TodoForm addItem={this.addItem} clearCompleted={this.clearCompleted}/>
         </div>
         <TodoList
           todos={this.state.todos}
