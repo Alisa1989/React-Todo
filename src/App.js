@@ -47,9 +47,9 @@ class App extends React.Component {
   //add new item
   addItem = item => {
     const newItem = {
-      name: item,
+      task: item,
       id: Date.now(),
-      purchased: false
+      completed: false
     };
     this.setState({
       todos: [...this.state.todos, newItem]
@@ -61,7 +61,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <h2>Welcome to your Todo App!</h2>
+          <h2>Let's get some stuff done!!</h2>
           <TodoForm addItem={this.addItem} />
         </div>
         <TodoList
