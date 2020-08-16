@@ -17,14 +17,16 @@ class TodoForm extends React.Component {
 
     submitItem = e => {
         e.preventDefault();
-        this.props.addItem(this.state.item);
+        if (this.state.item.trim().length){
+            this.props.addItem(this.state.item);
+        }
         this.setState({ item: "" });
         console.log("submitted");
     };
 
     render() {
         return (
-            <div>
+            <div className= "control-panel">
                 <form onSubmit={this.submitItem}>
                     <input
                         type="text"

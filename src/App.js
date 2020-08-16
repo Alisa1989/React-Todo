@@ -3,6 +3,8 @@ import React from 'react';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 
+import "./App.css";
+
 const todos = [
   {
     task: "Clean Garage",
@@ -12,6 +14,11 @@ const todos = [
   {
     task: "Wash Cats",
     id: 2,
+    completed: false
+  },
+  {
+    task: "Clean Floors",
+    id: 3,
     completed: false
   }
 ]
@@ -67,8 +74,8 @@ clearCompleted = e => {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className= "App">
+        <div className= "header">
           <h2>Let's get some stuff done!!</h2>
           <TodoForm addItem={this.addItem} clearCompleted={this.clearCompleted}/>
         </div>
